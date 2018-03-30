@@ -1,9 +1,6 @@
 defmodule Ominoes do
 
-    def omino_game(index,xx,rr,cc) do
-    x = 2
-    r = 1
-    c = 3
+    def omino_game(index,x,r,c) do
     IO.puts "Before firstIndicator"
     firstIndicator = 7
 
@@ -51,9 +48,9 @@ end
   |> Stream.map(fn ({line, index}) ->
     if index != 0 do
       list_of_inputs = String.split(line)
-      xx = Enum.at(list_of_inputs, 0)
-      rr = Enum.at(list_of_inputs, 1)
-      cc = Enum.at(list_of_inputs, 2)
+      xx = String.to_integer(Enum.at(list_of_inputs, 0))
+      rr = String.to_integer(Enum.at(list_of_inputs, 1))
+      cc = String.to_integer(Enum.at(list_of_inputs, 2))
       Ominoes.omino_game(index,xx,rr,cc)
     end
 
