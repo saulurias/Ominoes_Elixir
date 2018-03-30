@@ -1,46 +1,62 @@
 defmodule Ominoes do
-    
-def omino_game() do
-x = 2
-r = 1
-c = 3
-IO.puts "Before firstIndicator"
-firstIndicator = 7
 
-multiplicationResult = r * c
+    def omino_game(index,xx,rr,cc) do
+    x = 2
+    r = 1
+    c = 3
+    IO.puts "Before firstIndicator"
+    firstIndicator = 7
 
-secondIndicator = rem(multiplicationResult, x)
+    multiplicationResult = r * c
 
-thirdIndicator = x
+    secondIndicator = rem(multiplicationResult, x)
 
-fourthIndicator = 0
+    thirdIndicator = x
 
-if rem(x,2) == 0 do
- fourthIndicator = x / 2
-else
- fourthIndicator = (x/2) + 1
-end
+    fourthIndicator = 0
 
-winner = "Richard"
-
-if x < firstIndicator do
- if secondIndicator == 0 do
-   if r >= thirdIndicator || c >= thirdIndicator do
-    if r >= thirdIndicator do
-    if c >= fourthIndicator do
-        winner = "Gabriel"
+    if rem(x,2) == 0 do
+     fourthIndicator = x / 2
+    else
+     fourthIndicator = (x/2) + 1
     end
-    if c >= thirdIndicator do
-        winner = "Gabriel"
+
+    winner = "Richard"
+
+    if x < firstIndicator do
+     if secondIndicator == 0 do
+       if r >= thirdIndicator || c >= thirdIndicator do
+        if r >= thirdIndicator do
+        if c >= fourthIndicator do
+            winner = "Gabriel"
+        end
+        if c >= thirdIndicator do
+            winner = "Gabriel"
+        end
+        end
+       end
+     end
     end
+    File.write("output.txt", "Case ##{index}: #{winner}\n", [:append])
+    IO.puts "winner #{winner}"
     end
-   end
- end
-end
-IO.puts "winner #{winner}"
-end
 
 end
 
 
+
+  File.stream!("D-large-practice.in")
+  |> Stream.map(&String.strip/1)
+  |> Stream.with_index
+  |> Stream.map(fn ({line, index}) ->
+    if index != 0 do
+      list_of_inputs = String.split(line)
+      xx = Enum.at(list_of_inputs, 0)
+      rr = Enum.at(list_of_inputs, 1)
+      cc = Enum.at(list_of_inputs, 2)
+      Ominoes.omino_game(index,xx,rr,cc)
+    end
+
+  end)
+  |> Stream.run
 
